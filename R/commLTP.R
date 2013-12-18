@@ -1,10 +1,10 @@
-getCom = function(input,mission='ws',user,pw='password')
+commLTP = function(input,mission='ws',ID,pw='password')
 {
     addr = "http://api.ltp-cloud.com:8080"
     uris = "/ltp_srv/ltp"
     server = paste(addr,uris,sep='')
     
-    header = as.character(base64(paste(user,pw,sep=':')))
+    header = as.character(base64(paste(ID,pw,sep=':')))
     header = paste('Basic',header)
     header = c('Authorization'=header)
     
@@ -12,20 +12,34 @@ getCom = function(input,mission='ws',user,pw='password')
     data = paste(data,input,sep='&s=')
     data = URLencode(data)
     
-    ans = postForm(uri = server,
+    result = postForm(uri = server,
                    .opts = curlOptions(httpHEAD=header),
                    style = "post",
                    'x' = 'n',
                    's' = input,
                    'c' = 'utf-8',
                    't' = mission)
-    ans = rawToChar(ans)
-    return(ans)
+    result = rawToChar(result)
+    
+    result = htmlTreeParse(result,useInternalNodes=T)
+    r = xmlRoot(result)
+    r = r[[1]][[1]]
+    
+    missions = xmlAttrs(r[[1]])=='y'
+    ind = match(names(missions),
+                c("sent","word","pos","ne","parser","wsd","srl"))
+    missions = missions[ind]
+    
+    if (!missions[1])
+    {
+        cat('Mission Unfinished!\n')
+        return(doc(tags=missions));
+    }
+    
+    para_xml = xmlToList(r[[2]])#doc tag
+    return(list(missions,para_xml))
 }
 
-#require(tmcn)
-#require(RCurl)
-#require(XML)
 #txt=readLines('~/github/WordSplit/wuxia/越女剑.txt')
 #txt=toUTF8(txt)
 #txt=gsub('\\s+','',txt)

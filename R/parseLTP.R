@@ -1,21 +1,5 @@
-parseLTP = function(result)
+parseLTP = function(para_xml)
 {
-    result = htmlTreeParse(result,useInternalNodes=T)
-    r = xmlRoot(result)
-    r = r[[1]][[1]]
-    
-    missions = xmlAttrs(r[[1]])=='y'
-    ind = match(names(missions),
-                c("sent","word","pos","ne","parser","wsd","srl"))
-    missions = missions[ind]
-    
-    if (!missions[1])
-    {
-        cat('Mission Unfinished!\n')
-        return(doc(tags=missions));
-    }
-    
-    para_xml = xmlToList(r[[2]])#doc tag
     sents = list()
     
     for (p_ind in 1:length(para_xml))
@@ -81,6 +65,6 @@ parseLTP = function(result)
                                  args=args))
         }
     }
-    ans = doc(tags=missions,sents=sents)
-    ans
+    #ans = doc(tags=missions,sents=sents)
+    sents
 }
