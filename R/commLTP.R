@@ -20,7 +20,8 @@ commLTP = function(input,mission='ws',ID,pw='password')
                    'c' = 'utf-8',
                    't' = mission)
     result = rawToChar(result)
-    
+    if (mission!='ws')
+        return(result)
     #result = htmlTreeParse(result,useInternalNodes=T)
     result = xmlTreeParse(result,useInternalNodes=T)
     r = xmlRoot(result)
@@ -32,10 +33,7 @@ commLTP = function(input,mission='ws',ID,pw='password')
     missions = missions[ind]
     
     if (!missions[1])
-    {
-        cat('Mission Unfinished!\n')
-        return(doc(tags=missions));
-    }
+        stop('Mission Unfinished!\n')
     
     para_xml = xmlToList(r[[2]])#doc tag
     return(list(missions,para_xml))

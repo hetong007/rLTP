@@ -1,0 +1,6 @@
+export(doc)
+export(ltp)
+exportClasses(doc)
+exportMethods(as.data.frame)
+exportMethods(length)
+exportMethods(show)

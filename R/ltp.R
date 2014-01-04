@@ -1,5 +1,23 @@
+#' R Interface of LTP-cloud service
+#'
+#' This function deals with communication with the server.
+#' XML result will be parsed if the mission is word-splitting.
+#' Else the raw XML texts will be returned for further analysis.
+#' 
+#' @param input The input text.
+#' @param file The input file.
+#' @param mission Expected result for the cloud server, may be unfinished.
+#' @param email Your email for the cloud server.
+#' @param token Your unique token appeared on http://www.ltp-cloud.com/dashboard/ .
+#' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
+#' @export
+#' @examples
+#' #a=ltp('美国的华莱士，比你们不知高到哪里去了。我和他谈笑风生!')
+
+
 ltp = function(input=NULL,file=NULL,mission='ws',
-               email='hetong007@gmail.com',token='ypcOZA6a',maxUpload=100000)
+               email='hetong007@gmail.com',token='ypcOZA6a',
+               maxUpload=100000)
 {
     if (is.null(input) && is.null(file))
         stop('No Input.')
@@ -36,8 +54,14 @@ ltp = function(input=NULL,file=NULL,mission='ws',
     {
         cat('Uploading\n')
         para = commLTP(inputs,mission=mission,ID)
+        if (mission!='ws')
+        {
+            cat('Parser for non-Word-Splitting result is not available yet.',
+                '\n','Returning Raw XML texts for each part.')
+            return(para)
+        }
         cat('Downloaded,Parsing\n')
-        mission = para[[1]]
+        tag = para[[1]]
         sents = parseLTP(para[[2]])
     }
     else
@@ -53,24 +77,26 @@ ltp = function(input=NULL,file=NULL,mission='ws',
             cat(paste(i,n,sep='/'),'\n')
             p = proc.time()
         }
-        
-        #paras = lapply(inputs,commLTP,mission,ID)
+        if (mission!='ws')
+        {
+            cat('Parser for non-Word-Splitting result is not available yet.',
+                '\n','Returning Raw XML texts for each part.')
+            return(paras)
+        }
         cat('\nDownloaded,Parsing\n')
         missions = lapply(paras,function(x)x[[1]])
         missions = do.call(rbind,missions)
         n = ncol(missions)
-        mission = rep(FALSE,n)
+        tag = rep(FALSE,n)
         for (i in 1:n)
-            mission[i] = !any(!missions[,i])
+            tag[i] = !any(!missions[,i])
         
         paras = lapply(paras,function(x)x[[2]])
         para = list()
         for (p in paras)
             para = c(para,p)
-        tmpfun=cmpfun(parseLTP)
-        sents=tmpfun(para,mission)
-        #sents = parseLTP(para)
+        sents = parseLTP(para)
     }
-    ans = doc(tags=mission,sents=sents)
+    ans = doc(tags=tag,sents=sents)
     ans
 }

@@ -1,80 +1,27 @@
-parseLTP = function(para_xml,mission='ws')
+parseLTP = function(para_xml)
 {
-    sents = list()
+    para_len = length(para_xml)
+    sent_xml = lapply(para_xml,function(x)x[-length(x)])
+    sent_xml = unlist(sent_xml,recursive=F)
     
-    for (p_ind in 1:length(para_xml))
-    {
-        if (p_ind %% 100==0)
-            cat(paste(p_ind,length(para_xml),sep='/'),'\n')
-        p = para_xml[[p_ind]]
-        sent_xml = p[-length(p)]
-        p_attr = p$.attrs
-        
-        for (s_ind in 1:length(sent_xml))
-        {
-            s = sent_xml[[s_ind]]
-            word_xml = s[-length(s)]
-            s_attr = s$.attrs
-            n = length(word_xml)
-            terms = data.frame(id = 1:n,
-                               cont = rep('',n),
-                               pos = rep('',n),
-                               ne = rep('',n),
-                               parent = rep(-1,n),
-                               relate = rep('',n),
-                               wsd = rep('',n),
-                               wsdexp = rep('',n),
-                               hasargs = rep(FALSE,n))
-            args = vector(n,mode='list')
-            
-            if (mission=='ws')
-            {
-                terms[,1:2]=do.call(rbind,word_xml)
-                terms[,1]=as.numeric(terms[,1])
-            }
-            else
-            {
-                for (w_ind in 1:n)
-                {
-                    w = word_xml[[w_ind]]
-                    
-                    if (is.list(w))
-                    {
-                        w_attr = w$.attrs
-                        arg = w[-length(w)]
-                        arg = do.call(rbind,arg)
-                        rownames(arg)=NULL
-                        arg = as.data.frame(arg)
-                        arg[,1] = as.numeric(arg[,1])+1
-                        arg[,3] = as.numeric(arg[,3])+1
-                        arg[,4] = as.numeric(arg[,4])+1
-                        args[[w_ind]] = arg
-                        terms[['hasargs']][w_ind] = TRUE
-                    }
-                    else
-                        w_attr = w
-                    
-                    terms$cont[w_ind] = w_attr['cont']
-                    if (length(w_attr)>2)
-                    {
-                        w_attr = w_attr[-(1:2)]
-                        n_attr = names(w_attr)
-                        for (wa_ind in 1:length(w_attr))
-                            terms[[n_attr[wa_ind]]][w_ind] = w_attr[wa_ind]
-                    }
-                }
-            }
-            
-            terms$parent = as.numeric(terms$parent)+1
-            
-            s_cont = s_attr['cont']
-            sents = c(sents,sent(id=s_ind,
-                                 para_id=p_ind,
-                                 cont=s_cont,
-                                 terms=terms,
-                                 args=args))
-        }
-    }
-    #ans = doc(tags=missions,sents=sents)
-    sents
+    sent_cont = lapply(sent_xml,function(x)x[[length(x)]])
+    sent_cont = do.call(rbind,sent_cont)[,2]
+    names(sent_cont) = NULL
+    
+    sent_xml = lapply(sent_xml,function(x)do.call(rbind,x[-length(x)]))
+    sent_len = sapply(sent_xml,nrow)
+    names(sent_len) = NULL
+    sent_xml = do.call(rbind,sent_xml)
+    sent_xml = sent_xml[,2]
+    rownames(sent_xml) = NULL
+    sent_id = rep(1:length(sent_len),sent_len)
+    sent_dat = data.frame(sid = sent_id,words = sent_xml)
+    rownames(sent_dat) = NULL
+    
+    sent_len = cumsum(sent_len)
+    sent_begin = c(1,sent_len[-length(sent_len)]+1)
+    sent_end = sent_len
+    
+    result = list(sent_dat,sent_cont,sent_begin,sent_end)
+    return(result)
 }
