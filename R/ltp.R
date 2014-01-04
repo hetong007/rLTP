@@ -6,13 +6,17 @@
 #' 
 #' @param input The input text.
 #' @param file The input file.
-#' @param mission Expected result for the cloud server, may be unfinished.
+#' @param mission Expected result for the cloud server, may be unfinished. Optional choices are 
+#' 'ws' for word-splitting,
+#' 'pos' for part-of-speech,
+#' 'ner' for named entity recognition，
+#' 'dp' for dependency parser，
+#' 'srl' for semantic role labeling,
+#' 'all' for all missions.
 #' @param email Your email for the cloud server.
 #' @param token Your unique token appeared on http://www.ltp-cloud.com/dashboard/ .
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
 #' @export
-
-
 ltp = function(input=NULL,file=NULL,mission='ws',
                email='hetong007@gmail.com',token='ypcOZA6a',
                maxUpload=100000)

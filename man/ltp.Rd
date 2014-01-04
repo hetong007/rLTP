@@ -11,7 +11,10 @@ ltp(input = NULL, file = NULL, mission = "ws",
   \item{file}{The input file.}
 
   \item{mission}{Expected result for the cloud server, may
-  be unfinished.}
+  be unfinished. Optional choices are 'ws' for
+  word-splitting, 'pos' for part-of-speech, 'ner' for named
+  entity recognition， 'dp' for dependency parser， 'srl'
+  for semantic role labeling, 'all' for all missions.}
 
   \item{email}{Your email for the cloud server.}
 
