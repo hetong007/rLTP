@@ -18,11 +18,13 @@
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
 #' @export
 ltp = function(input=NULL,file=NULL,mission='ws',
-               email='hetong007@gmail.com',token='ypcOZA6a',
+               email='example@gmail.com',token='1a2b3c',
                maxUpload=100000)
 {
     if (is.null(input) && is.null(file))
         stop('No Input.')
+    if (email=='example@gmail.com')
+        stop('Please use a valid email and corresponding token')
     ID = paste(email,token,sep=':')
     if (!is.null(file))
         input = readLines(file)

@@ -3,4 +3,4 @@ rLTP
 
 An r package for ltp-cloud service.
 
-For more information please visit [ltp-cloud](http://www.ltp-cloud.com/)
+To get a valid **Token** please visit and register on [ltp-cloud](http://www.ltp-cloud.com/).
