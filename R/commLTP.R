@@ -8,9 +8,9 @@ commLTP = function(input,mission='ws',ID,pw='password')
     header = paste('Basic',header)
     header = c('Authorization'=header)
     
-    data = 'x=n&c=utf-8&t=all'
-    data = paste(data,input,sep='&s=')
-    data = URLencode(data)
+    #data = 'x=n&c=utf-8&t=all'
+    #data = paste(data,input,sep='&s=')
+    #data = URLencode(data)
     
     result = postForm(uri = server,
                    .opts = curlOptions(httpHEAD=header),
@@ -21,9 +21,10 @@ commLTP = function(input,mission='ws',ID,pw='password')
                    't' = mission)
     result = rawToChar(result)
     
-    result = htmlTreeParse(result,useInternalNodes=T)
+    #result = htmlTreeParse(result,useInternalNodes=T)
+    result = xmlTreeParse(result,useInternalNodes=T)
     r = xmlRoot(result)
-    r = r[[1]][[1]]
+    #r = r[[1]][[1]]
     
     missions = xmlAttrs(r[[1]])=='y'
     ind = match(names(missions),
@@ -39,10 +40,4 @@ commLTP = function(input,mission='ws',ID,pw='password')
     para_xml = xmlToList(r[[2]])#doc tag
     return(list(missions,para_xml))
 }
-
-#txt=readLines('~/github/WordSplit/wuxia/越女剑.txt')
-#txt=toUTF8(txt)
-#txt=gsub('\\s+','',txt)
-#txt=paste(txt,collapse='')
-#temp = getCom(txt,user='hetong007@gmail.com:ypcOZA6a')
 

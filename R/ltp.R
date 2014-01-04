@@ -1,5 +1,5 @@
 ltp = function(input=NULL,file=NULL,mission='ws',
-               email='hetong007@gmail.com',token='ypcOZA6a')
+               email='hetong007@gmail.com',token='ypcOZA6a',maxUpload=100000)
 {
     if (is.null(input) && is.null(file))
         stop('No Input.')
@@ -22,7 +22,7 @@ ltp = function(input=NULL,file=NULL,mission='ws',
         L = 1
         for (i in 2:n)
         {
-            if (nchar(inputs[L])+nchar(input[i])<100000)
+            if (nchar(inputs[L])+nchar(input[i])<maxUpload)
                 inputs[L] = paste(inputs[L],input[i],sep='\n')
             else
             {
@@ -67,7 +67,9 @@ ltp = function(input=NULL,file=NULL,mission='ws',
         para = list()
         for (p in paras)
             para = c(para,p)
-        sents = parseLTP(para)
+        tmpfun=cmpfun(parseLTP)
+        sents=tmpfun(para,mission)
+        #sents = parseLTP(para)
     }
     ans = doc(tags=mission,sents=sents)
     ans

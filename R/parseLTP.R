@@ -1,9 +1,11 @@
-parseLTP = function(para_xml)
+parseLTP = function(para_xml,mission='ws')
 {
     sents = list()
     
     for (p_ind in 1:length(para_xml))
     {
+        if (p_ind %% 100==0)
+            cat(paste(p_ind,length(para_xml),sep='/'),'\n')
         p = para_xml[[p_ind]]
         sent_xml = p[-length(p)]
         p_attr = p$.attrs
@@ -25,33 +27,41 @@ parseLTP = function(para_xml)
                                hasargs = rep(FALSE,n))
             args = vector(n,mode='list')
             
-            for (w_ind in 1:n)
+            if (mission=='ws')
             {
-                w = word_xml[[w_ind]]
-                
-                if (is.list(w))
+                terms[,1:2]=do.call(rbind,word_xml)
+                terms[,1]=as.numeric(terms[,1])
+            }
+            else
+            {
+                for (w_ind in 1:n)
                 {
-                    w_attr = w$.attrs
-                    arg = w[-length(w)]
-                    arg = do.call(rbind,arg)
-                    rownames(arg)=NULL
-                    arg = as.data.frame(arg)
-                    arg[,1] = as.numeric(arg[,1])+1
-                    arg[,3] = as.numeric(arg[,3])+1
-                    arg[,4] = as.numeric(arg[,4])+1
-                    args[[w_ind]] = arg
-                    terms[['hasargs']][w_ind] = TRUE
-                }
-                else
-                    w_attr = w
-                
-                terms$cont[w_ind] = w_attr['cont']
-                if (length(w_attr)>2)
-                {
-                    w_attr = w_attr[-(1:2)]
-                    n_attr = names(w_attr)
-                    for (wa_ind in 1:length(w_attr))
-                        terms[[n_attr[wa_ind]]][w_ind] = w_attr[wa_ind]
+                    w = word_xml[[w_ind]]
+                    
+                    if (is.list(w))
+                    {
+                        w_attr = w$.attrs
+                        arg = w[-length(w)]
+                        arg = do.call(rbind,arg)
+                        rownames(arg)=NULL
+                        arg = as.data.frame(arg)
+                        arg[,1] = as.numeric(arg[,1])+1
+                        arg[,3] = as.numeric(arg[,3])+1
+                        arg[,4] = as.numeric(arg[,4])+1
+                        args[[w_ind]] = arg
+                        terms[['hasargs']][w_ind] = TRUE
+                    }
+                    else
+                        w_attr = w
+                    
+                    terms$cont[w_ind] = w_attr['cont']
+                    if (length(w_attr)>2)
+                    {
+                        w_attr = w_attr[-(1:2)]
+                        n_attr = names(w_attr)
+                        for (wa_ind in 1:length(w_attr))
+                            terms[[n_attr[wa_ind]]][w_ind] = w_attr[wa_ind]
+                    }
                 }
             }
             
