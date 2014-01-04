@@ -12,7 +12,7 @@
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
 #' @export
 #' @examples
-#' #a=ltp('美国的华莱士，比你们不知高到哪里去了。我和他谈笑风生!')
+#' a=ltp('美国的华莱士，比你们不知高到哪里去了。我和他谈笑风生!')
 
 
 ltp = function(input=NULL,file=NULL,mission='ws',
@@ -32,7 +32,11 @@ ltp = function(input=NULL,file=NULL,mission='ws',
         stop('Empty Input.')
     n = length(input)
     if (n==1)
+    {
+        if (nchar(input)>maxUpload)
+            stop('This paragraph is too long to upload, please split it into smaller pieces.')
         inputs = input
+    }
     else
     {
         nc = nchar(input[1])
