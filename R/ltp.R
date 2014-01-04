@@ -11,8 +11,6 @@
 #' @param token Your unique token appeared on http://www.ltp-cloud.com/dashboard/ .
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
 #' @export
-#' @examples
-#' a=ltp('美国的华莱士，比你们不知高到哪里去了。我和他谈笑风生!')
 
 
 ltp = function(input=NULL,file=NULL,mission='ws',

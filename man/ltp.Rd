@@ -27,7 +27,4 @@ result will be parsed if the mission is word-splitting.
 Else the raw XML texts will be returned for further
 analysis.
 }
-\examples{
-#a=ltp('美国的华莱士，比你们不知高到哪里去了。我和他谈笑风生!')
-}
 
