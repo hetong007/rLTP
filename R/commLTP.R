@@ -20,15 +20,16 @@ commLTP = function(input,mission='ws',ID,pw='password')
                    'c' = 'utf-8',
                    't' = mission)
     result = rawToChar(result)
-	Encoding(result)='UTF-8'
-    if (Sys.info()['sysname']=='Windows')
-        result = iconv(result,'UTF-8','GBK')
+    Encoding(result)='UTF-8'
     if (mission!='ws')
+    {
+        if (Sys.info()['sysname']=='Windows')
+            result = iconv(result,'UTF-8','GBK')
         return(result)
-    #result = htmlTreeParse(result,useInternalNodes=T)
+    }
+    
     result = xmlTreeParse(result,useInternalNodes=T)
     r = xmlRoot(result)
-    #r = r[[1]][[1]]
     
     missions = xmlAttrs(r[[1]])=='y'
     ind = match(names(missions),

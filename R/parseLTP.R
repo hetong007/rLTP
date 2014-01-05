@@ -22,6 +22,12 @@ parseLTP = function(para_xml)
     sent_begin = c(1,sent_len[-length(sent_len)]+1)
     sent_end = sent_len
     
+    if (Sys.info()['sysname']=='Windows')
+    {
+        sent_dat[,2] = iconv(sent_dat[,2],'UTF-8','GBK')
+        sent_cont = iconv(sent_cont,'UTF-8','GBK')
+    }
+    
     result = list(sent_dat,sent_cont,sent_begin,sent_end)
     return(result)
 }
