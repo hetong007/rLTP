@@ -20,6 +20,8 @@ commLTP = function(input,mission='ws',ID,pw='password')
                    'c' = 'utf-8',
                    't' = mission)
     result = rawToChar(result)
+    if (Sys.info()['sysname']=='Windows')
+        result = iconv(result,'UTF-8','gb2312')
     if (mission!='ws')
         return(result)
     #result = htmlTreeParse(result,useInternalNodes=T)
