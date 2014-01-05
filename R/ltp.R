@@ -25,6 +25,8 @@ ltp = function(input=NULL,file=NULL,mission='ws',
         stop('No Input.')
     if (email=='example@gmail.com')
         stop('Please use a valid email and corresponding token')
+    email = gsub('\\s+','',email)
+    token = gsub('\\s+','',token)
     ID = paste(email,token,sep=':')
     if (!is.null(file))
         input = readLines(file)
