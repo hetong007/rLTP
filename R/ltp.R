@@ -18,7 +18,7 @@
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
 #' @export
 ltp = function(input=NULL,file=NULL,mission='ws',
-               email='example@gmail.com',token='1a2b3c',
+               email='example@mail.com',token='1a2b3c',
                maxUpload=100000)
 {
     if (is.null(input) && is.null(file))

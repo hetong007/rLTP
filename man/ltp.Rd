@@ -3,7 +3,7 @@
 \title{R Interface of LTP-cloud service}
 \usage{
 ltp(input = NULL, file = NULL, mission = "ws",
-  email = "example@gmail.com", token = "1a2b3c", maxUpload = 1e+05)
+  email = "example@mail.com", token = "1a2b3c", maxUpload = 1e+05)
 }
 \arguments{
   \item{input}{The input text.}
