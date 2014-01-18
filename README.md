@@ -9,3 +9,4 @@ To get a valid **Token** please visit and register on [ltp-cloud](http://www.ltp
 
 Since LTP-cloud turns to new APIs, the corresponding version is under development.
 
+LTP-Cloud now Also provides [official Sample R code](https://github.com/HIT-SCIR/ltp-cloud-api-tutorial/tree/master/R).
