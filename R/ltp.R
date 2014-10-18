@@ -46,7 +46,7 @@ ltp = function(input=NULL,file=NULL,mission='ws',
     else
     {
         nc = nchar(input[1])
-        inputs = ''
+        inputs = input[1]
         L = 1
         for (i in 2:n)
         {
