@@ -1,45 +1,26 @@
-commLTP = function(input,mission='ws',ID,pw='password')
+commLTP = function(input,mission='ws',api_key)
 {
-    addr = "http://api.ltp-cloud.com:8080"
-    uris = "/ltp_srv/ltp"
-    server = paste(addr,uris,sep='')
-    
-    header = as.character(base64(paste(ID,pw,sep=':')))
-    header = paste('Basic',header)
-    header = c('Authorization'=header)
-    
-    #data = 'x=n&c=utf-8&t=all'
-    #data = paste(data,input,sep='&s=')
-    #data = URLencode(data)
-    
-    result = postForm(uri = server,
-                   .opts = curlOptions(httpHEAD=header),
-                   style = "post",
-                   'x' = 'n',
-                   's' = input,
-                   'c' = 'utf-8',
-                   't' = mission)
-    result = rawToChar(result)
+    addr = 'http://ltpapi.voicecloud.cn/analysis/'
+    if(mission=='ws')
+        return_format = 'plain'
+    else
+        return_format = 'json'
+    result = postForm(uri = addr,
+                      style = "post",
+                      'text' = input,
+                      'api_key' = api_key,
+                      'pattern' = mission,
+                      'format' = return_format)
+
     Encoding(result)='UTF-8'
-    if (mission!='ws')
+    if (return_format!='plain')
     {
         if (Sys.info()['sysname']=='Windows')
             result = iconv(result,'UTF-8','GBK')
         return(result)
     }
     
-    result = xmlTreeParse(result,useInternalNodes=T)
-    r = xmlRoot(result)
-    
-    missions = xmlAttrs(r[[1]])=='y'
-    ind = match(names(missions),
-                c("sent","word","pos","ne","parser","wsd","srl"))
-    missions = missions[ind]
-    
-    if (!missions[1])
-        stop('Mission Unfinished!\n')
-    
-    para_xml = xmlToList(r[[2]])#doc tag
-    return(list(missions,para_xml))
+    result = parseLTP(result)
+    result
 }
 

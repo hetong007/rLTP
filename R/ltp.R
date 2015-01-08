@@ -9,25 +9,19 @@
 #' @param mission Expected result for the cloud server, may be unfinished. Optional choices are 
 #' 'ws' for word-splitting,
 #' 'pos' for part-of-speech,
-#' 'ner' for named entity recognition，
-#' 'dp' for dependency parser，
+#' 'ner' for named entity recognition,
+#' 'dp' for dependency parser,
 #' 'srl' for semantic role labeling,
 #' 'all' for all missions.
-#' @param email Your email for the cloud server.
-#' @param token Your unique token appeared on http://www.ltp-cloud.com/dashboard/ .
+#' @param api_key Your API_Key for the cloud server.
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
 #' @export
 ltp = function(input=NULL,file=NULL,mission='ws',
-               email='example@mail.com',token='1a2b3c',
+               api_key = 'yourAPIKEY',
                maxUpload=100000)
 {
     if (is.null(input) && is.null(file))
         stop('No Input.')
-    if (email=='example@gmail.com')
-        stop('Please use a valid email and corresponding token')
-    email = gsub('\\s+','',email)
-    token = gsub('\\s+','',token)
-    ID = paste(email,token,sep=':')
     if (!is.null(file))
         input = readLines(file)
     if (!isUTF8(input[1]))
@@ -63,16 +57,15 @@ ltp = function(input=NULL,file=NULL,mission='ws',
     if (length(inputs)==1)
     {
         cat('Uploading\n')
-        para = commLTP(inputs,mission=mission,ID)
+        para = commLTP(inputs,mission=mission,api_key)
         if (mission!='ws')
         {
             cat('Parser for non-Word-Splitting result is not available yet.',
-                '\n','Returning Raw XML texts for each part.')
+                '\n','Returning Raw json texts for each part.\n')
             return(para)
         }
-        cat('Downloaded,Parsing\n')
-        tag = para[[1]]
-        sents = parseLTP(para[[2]])
+        ans = para
+        cat('Analysis Finished!\n')
     }
     else
     {
@@ -82,7 +75,7 @@ ltp = function(input=NULL,file=NULL,mission='ws',
         p = proc.time()
         for (i in 1:n)
         {
-            paras[[i]] = commLTP(inputs[i],mission,ID)
+            paras[[i]] = commLTP(inputs[i],mission,api_key)
             show(proc.time()-p)
             cat(paste(i,n,sep='/'),'\n')
             p = proc.time()
@@ -90,23 +83,15 @@ ltp = function(input=NULL,file=NULL,mission='ws',
         if (mission!='ws')
         {
             cat('Parser for non-Word-Splitting result is not available yet.',
-                '\n','Returning Raw XML texts for each part.')
+                '\n','Returning Raw json texts for each part.\n')
             return(paras)
         }
-        cat('\nDownloaded,Parsing\n')
-        missions = lapply(paras,function(x)x[[1]])
-        missions = do.call(rbind,missions)
-        n = ncol(missions)
-        tag = rep(FALSE,n)
-        for (i in 1:n)
-            tag[i] = !any(!missions[,i])
+        else
+        {
+            ans = unlist(paras)
+            cat('Analysis Finished!\n')
+        }
         
-        paras = lapply(paras,function(x)x[[2]])
-        para = list()
-        for (p in paras)
-            para = c(para,p)
-        sents = parseLTP(para)
     }
-    ans = doc(tags=tag,sents=sents)
     ans
 }
