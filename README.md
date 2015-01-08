@@ -1,9 +1,14 @@
 rLTP
 ====
 
-An r package for ltp-cloud service.
+An r package for ltp-cloud service. To get a valid **API_Key** please register on [ltp-cloud](http://www.ltp-cloud.com/) and visit [Dashboard](http://www.ltp-cloud.com/dashboard).
 
-To get a valid **API_Key** please visit and register on [ltp-cloud](http://www.ltp-cloud.com/).
+Installation:
+
+```{r}
+require(devtools)
+install_github('rLTP','hetong007')
+```
 
 Try the following example:
 
