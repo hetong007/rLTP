@@ -6,9 +6,11 @@ An r package for ltp-cloud service. To get a valid **API_Key** please register o
 Installation:
 
 ```{r}
+install.packages("tmcn", repos="http://R-Forge.R-project.org")
 require(devtools)
 install_github('rLTP','hetong007')
 ```
+We need `tmcn` for conversion from `GBK` to `UTF8`. 
 
 Try the following example:
 
