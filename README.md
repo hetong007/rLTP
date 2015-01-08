@@ -8,7 +8,8 @@ An r package for ltp-cloud service. To get a valid **API_Key** please register o
 We need `tmcn` for conversion from `GBK` to `UTF8`. It is not on `CRAN`. If you don't have it installed, please run the following code:
 
 ```{r}
-install.packages("tmcn", repos="http://R-Forge.R-project.org")
+if (!require('tmcn'))
+    install.packages("tmcn", repos="http://R-Forge.R-project.org")
 ```
 
 ## Installation:
