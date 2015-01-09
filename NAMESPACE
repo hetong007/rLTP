@@ -1,2 +1,2 @@
-useDynLib("tmcn")
+useDynLib("rLTP")
 export(ltp)
