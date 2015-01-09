@@ -3,14 +3,7 @@ rLTP
 
 An r package for ltp-cloud service. To get a valid **API_Key** please register on [ltp-cloud](http://www.ltp-cloud.com/) and visit [Dashboard](http://www.ltp-cloud.com/dashboard).
 
-## Before Installation:
-
-We need `tmcn` for conversion from `GBK` to `UTF8`. It is not on `CRAN`. If you don't have it installed, please run the following code:
-
-```{r}
-if (!require('tmcn'))
-    install.packages("tmcn", repos="http://R-Forge.R-project.org")
-```
+I borrowed some pieces of codes from [tmcn](https://r-forge.r-project.org/R/?group_id=1571) to do encoding conversion.
 
 ## Installation:
 
