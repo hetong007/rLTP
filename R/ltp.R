@@ -17,7 +17,7 @@
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
 #' @export
 ltp = function(input=NULL,file=NULL,mission='ws',
-               api_key = 'yourAPIKEY',
+               api_key = getOption('ltp_api_key'),
                maxUpload=100000)
 {
     if (is.null(input) && is.null(file))
