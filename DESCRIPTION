@@ -10,3 +10,4 @@ Depends:
     R (>= 3.0.2),RCurl
 License: LGPL
 LazyData: true
+Language: en-US,zh-cmn
