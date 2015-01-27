@@ -20,7 +20,7 @@
 #' # This api_key is publicly accessible.
 #' # So it is strongly recommended to register for your own key.
 #' options(ltp_api_key='l2T9N724koSqEcDJvQHtRGVV2erajgPOgB0FAcLj')
-#' ltp('根据碳碳键键能能否否定定律一或定律二？')
+#' ltp('Replace this field with a Chinese sentence.')
 #' 
 #' @export
 #' 
