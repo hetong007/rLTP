@@ -29,4 +29,11 @@ This function deals with communication with the server.
 XML result will be parsed if the mission is word-splitting.
 Else the raw XML texts will be returned for further analysis.
 }
+\examples{
+require(rLTP)
+# This api_key is publicly accessible.
+# So it is strongly recommended to register for your own key.
+options(ltp_api_key='l2T9N724koSqEcDJvQHtRGVV2erajgPOgB0FAcLj')
+ltp('根据碳碳键键能能否否定定律一或定律二？')
+}
 

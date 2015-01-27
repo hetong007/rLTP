@@ -15,7 +15,15 @@
 #' 'all' for all missions.
 #' @param api_key Your API_Key for the cloud server. Visit http://www.ltp-cloud.com/dashboard/ to get it.
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
+#' @examples
+#' require(rLTP)
+#' # This api_key is publicly accessible.
+#' # So it is strongly recommended to register for your own key.
+#' options(ltp_api_key='l2T9N724koSqEcDJvQHtRGVV2erajgPOgB0FAcLj')
+#' ltp('根据碳碳键键能能否否定定律一或定律二？')
+#' 
 #' @export
+#' 
 ltp = function(input=NULL,file=NULL,mission='ws',
                api_key = getOption('ltp_api_key'),
                maxUpload=100000)

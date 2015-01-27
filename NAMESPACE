@@ -1,2 +1,4 @@
 useDynLib("rLTP")
 export(ltp)
+importFrom(RCurl,postForm)
+
