@@ -13,7 +13,7 @@
 #' 'dp' for dependency parser,
 #' 'srl' for semantic role labeling,
 #' 'all' for all missions.
-#' @param api_key Your API_Key for the cloud server.
+#' @param api_key Your API_Key for the cloud server. Visit http://www.ltp-cloud.com/dashboard/ to get it.
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
 #' @export
 ltp = function(input=NULL,file=NULL,mission='ws',

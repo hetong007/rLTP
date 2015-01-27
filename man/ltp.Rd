@@ -20,7 +20,7 @@ ltp(input = NULL, file = NULL, mission = "ws",
 'srl' for semantic role labeling,
 'all' for all missions.}
 
-\item{api_key}{Your API_Key for the cloud server.}
+\item{api_key}{Your API_Key for the cloud server. Visit http://www.ltp-cloud.com/dashboard/ to get it.}
 
 \item{maxUpload}{Due to the limitation of the server, we cut the input in pieces.}
 }
