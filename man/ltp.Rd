@@ -4,8 +4,8 @@
 \alias{ltp}
 \title{R Interface of LTP-cloud service}
 \usage{
-ltp(input = NULL, file = NULL, mission = "ws", api_key = "yourAPIKEY",
-  maxUpload = 1e+05)
+ltp(input = NULL, file = NULL, mission = "ws",
+  api_key = getOption("ltp_api_key"), maxUpload = 1e+05)
 }
 \arguments{
 \item{input}{The input text.}
