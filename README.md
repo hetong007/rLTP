@@ -7,6 +7,14 @@ I borrowed some pieces of codes from [tmcn](https://r-forge.r-project.org/R/?gro
 
 ## Installation:
 
+It is on CRAN now. Install the stable version by
+
+```{r}
+install.packages('rLTP')
+```
+
+For up-to-date version please run
+
 ```{r}
 require(devtools)
 install_github('hetong007/rLTP')
