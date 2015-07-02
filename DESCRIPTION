@@ -3,7 +3,7 @@ Title: R interface to LTP-Cloud service
 Description: R interface to LTP-Cloud service for Natural Language Processing
     in Chinese. For more details please visit http://www.ltp-cloud.com/. Visit 
     https://github.com/hetong007/rLTP for up-to-date version.
-Version: 0.1-1
+Version: 0.1.1
 Author: Tong He <hetong007@gmail.com>
 Maintainer: Tong He <hetong007@gmail.com>
 BugReports: https://github.com/hetong007/rLTP/issues
