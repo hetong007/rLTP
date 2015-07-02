@@ -84,7 +84,7 @@ ltp = function(input=NULL,file=NULL,mission='ws',
         for (i in 1:n)
         {
             paras[[i]] = commLTP(inputs[i],mission,api_key)
-            show(proc.time()-p)
+            message(proc.time()-p)
             cat(paste(i,n,sep='/'),'\n')
             p = proc.time()
         }
