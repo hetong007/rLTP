@@ -51,10 +51,7 @@ int IsUTF8(const void* pBuffer, long size) {
 extern "C" {
 	void CWrapper_encoding_isutf8(char **characters, int *numres)
 	{
-		char* s = *characters;
-		int l;
-		l = strlen(s);
-		*numres = IsUTF8(s,l);
+	  *numres = IsUTF8(*characters,strlen(*characters));
 	}
 }
 

@@ -108,10 +108,7 @@ int IsGBK(const void* pBuffer, long size)
 extern "C" {
 	void CWrapper_encoding_isgbk(char **characters, int *numres)
 	{
-		char* s = *characters;
-		int l;
-		l = strlen(s);
-		*numres = IsGBK(s,l);
+	  *numres = IsGBK(*characters,strlen(*characters));
 	}
 }
 

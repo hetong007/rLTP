@@ -22,7 +22,7 @@ int IsBIG5(const void* pBuffer, long size)
 			if (start >= end -1)
 				break;
  
-			if (start[1] < 0X40 || start[1] > 0X7E && start[1] < 0XA1 || start[1] > 0xFE)
+			if (start[1] < 0X40 || (start[1] > 0X7E && start[1] < 0XA1) || start[1] > 0xFE)
 			{
 				IsBIG5 = 0;
 				break;
@@ -40,7 +40,7 @@ int IsBIG5(const void* pBuffer, long size)
 			if (start >= end -1)
 				break;
  
-			if (start[1] < 0X40 || start[1] > 0X7E && start[1] < 0XA1 || start[1] > 0xFE)
+			if (start[1] < 0X40 || (start[1] > 0X7E && start[1] < 0XA1) || start[1] > 0xFE)
 			{
 				IsBIG5 = 0;
 				break;
@@ -62,10 +62,7 @@ int IsBIG5(const void* pBuffer, long size)
 extern "C" {
 	void CWrapper_encoding_isbig5(char **characters, int *numres)
 	{
-		char* s = *characters;
-		int l;
-		l = strlen(s);
-		*numres = IsBIG5(s,l);
+		*numres = IsBIG5(*characters, strlen(*characters));
 	}
 }
 

@@ -62,10 +62,7 @@ int IsGB2312(const void* pBuffer, long size)
 extern "C" {
 	void CWrapper_encoding_isgb2312(char **characters, int *numres)
 	{
-		char* s = *characters;
-		int l;
-		l = strlen(s);
-		*numres = IsGB2312(s,l);
+	  *numres = IsGB2312(*characters,strlen(*characters));
 	}
 }
 
