@@ -1,4 +1,4 @@
-commLTP = function(input,mission='ws',api_key)
+commLTP = function(input, mission = 'ws', api_key)
 {
     addr = 'http://ltpapi.voicecloud.cn/analysis/'
     if(mission=='ws')

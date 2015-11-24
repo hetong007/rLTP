@@ -24,9 +24,9 @@
 #' 
 #' @export
 #' 
-ltp = function(input=NULL,file=NULL,mission='ws',
+ltp = function(input = NULL, file = NULL, mission = 'ws',
                api_key = getOption('ltp_api_key'),
-               maxUpload=100000)
+               maxUpload = 100000)
 {
     if (is.null(input) && is.null(file))
         stop('No Input.')
