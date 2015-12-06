@@ -150,10 +150,7 @@ int IsGB18030(const void* pBuffer, long size)
 extern "C" {
 	void CWrapper_encoding_isgb18030(char **characters, int *numres)
 	{
-		char* s = *characters;
-		int l;
-		l = strlen(s);
-		*numres = IsGB18030(s,l);
+		*numres = IsGB18030(*characters,strlen(*characters));
 	}
 }
 
