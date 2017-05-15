@@ -6,7 +6,7 @@ is_x <- function(string, combine, r_func, c_func){
   if (length(string)  == 1) {
     output <- .C(c_func, 
                  characters = as.character(string),
-                 numres = 2L, PACKAGE = 'rLTP')
+                 numres = 2L)
     return(as.logical(output$numres))
   }
   
