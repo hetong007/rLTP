@@ -1,4 +1,4 @@
-#include <stdlib.h> // for NULL
+#include <stdlib.h>
 #include <R_ext/Rdynload.h>
 
 /* FIXME: 
@@ -6,10 +6,18 @@
 */
 
 /* .C calls */
-extern void c_func(void *, void *);
+extern void CWrapper_encoding_isbig5(char **, int *);
+extern void CWrapper_encoding_isgbk(char **, int *);
+extern void CWrapper_encoding_isgb18030(char **, int *);
+extern void CWrapper_encoding_isgb2312(char **, int *);
+extern void CWrapper_encoding_isutf8(char **, int *);
 
 static const R_CMethodDef CEntries[] = {
-    {"c_func", (DL_FUNC) &c_func, 2},
+    {"CWrapper_encoding_isbig5", (DL_FUNC) &CWrapper_encoding_isbig5, 2},
+    {"CWrapper_encoding_isgbk", (DL_FUNC) &CWrapper_encoding_isgbk, 2},
+    {"CWrapper_encoding_isgb18030", (DL_FUNC) &CWrapper_encoding_isgb18030, 2},
+    {"CWrapper_encoding_isgb2312", (DL_FUNC) &CWrapper_encoding_isgb2312, 2},
+    {"CWrapper_encoding_isutf8", (DL_FUNC) &CWrapper_encoding_isutf8, 2},
     {NULL, NULL, 0}
 };
 
