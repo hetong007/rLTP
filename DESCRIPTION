@@ -1,6 +1,6 @@
 Package: rLTP
-Title: R Interface to the 'LTP-Cloud Service'
-Description: R interface to the 'LTP-Cloud service' for Natural Language Processing
+Title: R Interface to the 'LTP'-Cloud Service
+Description: R interface to the 'LTP'-Cloud service for Natural Language Processing
     in Chinese (http://www.ltp-cloud.com/).
 Version: 0.1.3
 Author: Tong He [aut, cre], Oliver Keyes [ctb]
