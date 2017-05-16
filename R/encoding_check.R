@@ -4,9 +4,33 @@ is_x <- function(string, combine, r_func, c_func){
   string <- .verifyChar(string)
   
   if (length(string)  == 1) {
-    output <- .C(c_func, 
-                 characters = as.character(string),
-                 numres = 2L)
+    switch(c_func,
+      CWrapper_encoding_isbig5={
+        output <- .C("CWrapper_encoding_isbig5", 
+                     characters = as.character(string),
+                     numres = 2L)
+      },
+      CWrapper_encoding_isgbk={
+        output <- .C("CWrapper_encoding_isgbk", 
+                     characters = as.character(string),
+                     numres = 2L)
+      },
+      CWrapper_encoding_isgb18030={
+        output <- .C("CWrapper_encoding_isgb18030", 
+                     characters = as.character(string),
+                     numres = 2L)
+      },
+      CWrapper_encoding_isgb2312={
+        output <- .C("CWrapper_encoding_isgb2312", 
+                     characters = as.character(string),
+                     numres = 2L)
+      },
+      CWrapper_encoding_isutf8={
+        output <- .C("CWrapper_encoding_isutf8", 
+                     characters = as.character(string),
+                     numres = 2L)
+      },
+    )
     return(as.logical(output$numres))
   }
   
@@ -17,6 +41,7 @@ is_x <- function(string, combine, r_func, c_func){
   return(as.vector(sapply(string, r_func)))
   
 }
+
 
 #' @title Indicate whether the encoding of input string is BIG5.
 #' 
