@@ -16,11 +16,13 @@
 #' @param api_key Your API_Key for the cloud server. Visit http://www.ltp-cloud.com/dashboard/ to get it.
 #' @param maxUpload Due to the limitation of the server, we cut the input in pieces.
 #' @examples
+#' \dontrun{
 #' # require(rLTP)
 #' # This api_key is publicly accessible.
 #' # So it is strongly recommended to register for your own key.
 #' # options(ltp_api_key='l2T9N724koSqEcDJvQHtRGVV2erajgPOgB0FAcLj')
 #' # ltp('Replace this field with a Chinese sentence.')
+#' }
 #' 
 #' @export
 #' 

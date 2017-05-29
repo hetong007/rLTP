@@ -43,6 +43,8 @@ is_x <- function(string, combine, r_func, c_func){
 }
 
 
+#' Indicate whether the encoding of input string is BIG5.
+#'
 #' @title Indicate whether the encoding of input string is BIG5.
 #' 
 #' @param string A character vector.
@@ -58,6 +60,8 @@ isBIG5 <- function(string, combine = FALSE){
 }
 
 
+#' Indicate whether the encoding of input string is GBK.
+#' 
 #' @title Indicate whether the encoding of input string is GBK.
 #' 
 #' @param string A character vector.
@@ -71,6 +75,8 @@ isGBK <- function(string, combine = FALSE){
   return(is_x(string, combine, r_func = isGBK, c_func = "CWrapper_encoding_isgbk"))
 }
 
+#' Indicate whether the encoding of input string is GBK.
+#' 
 #' @title Indicate whether the encoding of input string is GBK.
 #' 
 #' @param string A character vector.
@@ -85,6 +91,8 @@ isGB18030 <- function(string, combine = FALSE){
   return(is_x(string, combine, r_func = isGB18030, c_func = "CWrapper_encoding_isgb18030"))
 }
 
+#' Indicate whether the encoding of input string is GB18030.
+#' 
 #' @title Indicate whether the encoding of input string is GB18030.
 #' 
 #' @param string A character vector.
@@ -99,6 +107,8 @@ isGB2312 <- function(string, combine = FALSE){
   return(is_x(string, combine, r_func = isGB2312, c_func = "CWrapper_encoding_isgb2312"))
 }
 
+#' Indicate whether the encoding of input string is UTF-8.
+#' 
 #' @title Indicate whether the encoding of input string is UTF-8.
 #' 
 #' @param string A character vector.
